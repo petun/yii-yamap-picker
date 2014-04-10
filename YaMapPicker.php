@@ -2,15 +2,42 @@
 
 class YaMapPicker extends CWidget {
 
-	public $latId = "latitude";
+	public $fieldNameLat;
 
-	public $lonId = "longitude";
+	public $fieldNameLong;
 
-	public $zoom = "zoom";
+	public $fieldNameZoom;
 
+	public $model;
+
+	public $modelLat;
+
+	public $modelLong;
+
+	public $modelZoom;
 
 	public function init() {
-		Yii::app()->getClientScript()->registerScript('YaMapPicker');
+		ob_start();
+		include("YaMapPicker.js");
+		$picker = ob_get_clean();
+
+		Yii::app()->getClientScript()->registerScriptFile('http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru_RU');
+		Yii::app()->getClientScript()
+			->registerScript('YaMapPicker',$picker);
+
+
+		echo $this->render('map',
+			array(
+				'fieldNameLat' => $this->fieldNameLat
+				,'fieldNameLong' => $this->fieldNameLong
+				,'fieldNameZoom' => $this->fieldNameZoom
+				,'model' => $this->model
+				,'modelLat' => $this->modelLat
+				,'modelLong' => $this->modelLong
+				,'modelZoom' => $this->modelZoom
+
+			)
+		);
 	}
 
 
