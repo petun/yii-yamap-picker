@@ -27,10 +27,13 @@ function initMapCallback() {
             yamap.setCenter([y_coords,x_coords]);
         }
 
-        yamap.events.add('click', function (e) {
-            var coords = e.get('coordPosition');
-            setInitDot(coords);
-        });
+        if (!yaMapViewMode) {
+            yamap.events.add('click', function (e) {
+                var coords = e.get('coordPosition');
+                setInitDot(coords);
+            });
+        }
+
     }
 }
 
@@ -43,7 +46,7 @@ function setInitDot(coords) {
     $('#yaMapLat').val(coords[1]);
     $('#yaMapZoom').val(yamap.getZoom());
 
-    initDot = new ymaps.Placemark(coords,{},{draggable: true});
+    initDot = new ymaps.Placemark(coords,{},{draggable: !yaMapViewMode});
     yamap.geoObjects.add(initDot);
 
     initDot.events.add('dragend', function(e) {
