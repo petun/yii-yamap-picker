@@ -3,7 +3,7 @@
 <? echo CHtml::hiddenField($fieldNameZoom,$model->{$modelZoom}, array('id' => 'yaMapZoom')); ?>
 
 
-<div id="YMap" style="width: <? echo $width;?>px; height: <? echo $height;?>px;" data-viewmode="<? echo $viewMode ? 1 : 0 ?>">
+<div id="YMap" style="width: <? echo $width;?>px; height: <? echo $height;?>px;">
 
 
 </div>
